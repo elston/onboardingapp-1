@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load mathfilters %}
+
+{% block breadcrumb %}
+    <li class="active">Update Account</li>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div id="" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <h3> Choose Account Level</h3> <br>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th class="text-center">Limit Organization Number</th>
+                            <th class="text-center">Limit Team Number</th>
+                            <th class="text-center">Monthly Rate</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for account in accounts %}
+                        <tr>
+                            <td style="vertical-align: middle;">{{ account.name }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ account.org_limit }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ account.team_limit }}</td>
+                            <td class="text-center" style="vertical-align: middle;">${{ account.budget }}</td>
+                            <td>
+                                <form action="{% url 'charge_account' %}" method="post">
+                                {% csrf_token %}
+                                    <input type="hidden" name="a_id" value="{{ account.id }}">
+                                    {% if customer_id %}
+                                        <div class="pw-change team-info plan-btn">
+                                            <button class="acc-btns" style="font-size: 12px !important;"> Update Account </button>
+                                        </div>
+                                    {% else %}
+                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                data-key="{{ key }}"
+                                                data-name="Update Account"
+                                                data-description="MVP Charge"
+                                                data-amount="{{ account.budget|mul:100 }}"
+                                                data-email="{{ email }}"
+                                                data-locale="auto">
+                                        </script>
+                                    {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

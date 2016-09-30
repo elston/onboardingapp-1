@@ -1,0 +1,812 @@
+[
+{
+    "model": "team.service",
+    "pk": 1,
+    "fields": {
+        "name": "Slack",
+        "token": "724fc$gAAAAABXvmUdmv3fFyn28PuATXhOJuXMzic9h2L0-SPORNsdwZwHn8cNU9QwVdKFiChJ8tSjRJ9aQY9oSP89Z39ANhJ5iDArHr8DLOQyaA6afLg1QxZAkKr1-2Fqa2_H6F8RDB8qRVCLDv-gp_I7wkiZUf3YQpgCUw==",
+        "org_name": "Ravioli Labs",
+        "team_name": "raviolilabs",
+        "team_id": "T0501U2ET",
+        "is_active": true
+    }
+},
+{
+    "model": "team.service",
+    "pk": 2,
+    "fields": {
+        "name": "Slack",
+        "token": "bc32a$gAAAAABXvmVGKQAzGiBoK_9Sz4jGAiiPnjSaUnVbjViO61jJnfXf_uyjCACfXNsoBDXe1w0CzZKR_uwb9koD93JGo_E7oLHZDa0PbyAz_AnkVrYpN-FmwR3P3_hy1l5INsH9C3KKZYWXvdTyFVcfE1U0jTnnhzBXGA==",
+        "org_name": "RL/LM-nonprofits",
+        "team_name": "rllm-nonprofits",
+        "team_id": "T1DME5AGY",
+        "is_active": true
+    }
+},
+{
+    "model": "team.service",
+    "pk": 3,
+    "fields": {
+        "name": "Trello",
+        "token": "7520a$gAAAAABXvzA0t-BTCFqMQQBBtKHQC1JahMDKjbmUOxd2JV_Jnqmk40Ap5WLMC3fS6hu1sS4psWAMNIJ2UoxeprTlpZDtW95kLPcemcv89VZGHD4H7iupNRrUzt_pd9vsXsKaX86J2G6crlVuZAdd69X3aJYBTohEuwyzK1MVMqr4Qkuz4h0lcuE=",
+        "org_name": "539096a599c178398df32eef109f4fa8",
+        "team_name": "raviolilabs",
+        "team_id": "56a675344b08da4a3dec3d06",
+        "is_active": true
+    }
+},
+{
+    "model": "team.service",
+    "pk": 4,
+    "fields": {
+        "name": "Slack",
+        "token": "3d983$gAAAAABXvzM8kdARC1iP9iVJy0dQma6WT49bAx4Kb6c7nyTgGDGNznuboFmge9fS0wF4ZkCC9PKJJ3WGd07l9iJBYq-hMuRXhFi-rPLgNIGIEnskcsQclguIDJTs6XToFEYNEel4at8U236BqGDobh_LlIb6YXoQjw==",
+        "org_name": "Ravioli Labs",
+        "team_name": "raviolilabs",
+        "team_id": "T0501U2ET",
+        "is_active": true
+    }
+},
+{
+    "model": "team.service",
+    "pk": 5,
+    "fields": {
+        "name": "Trello",
+        "token": "0cace$gAAAAABXvzNbTDUpzzlo0dkvJSn9qnFAXCvHsD-fZkD2iANQmuJ0Hips7K93hTJhUjIcfuRRqn6OWMdYXZ1mlZDsykjVvQw1vEy_yMMQ_PAgefpn2HJGMirP7Rms0w-wsHIngAFkWUWUfLfkyyrwA6HJqzGvx3eQ1Is7WdIxRenGH-wirAYTh98=",
+        "org_name": "539096a599c178398df32eef109f4fa8",
+        "team_name": "raviolilabs",
+        "team_id": "56a675344b08da4a3dec3d06",
+        "is_active": true
+    }
+},
+{
+    "model": "team.account",
+    "pk": 2,
+    "fields": {
+        "name": "Level 1",
+        "org_limit": 2,
+        "team_limit": 5,
+        "budget": 23,
+        "description": "",
+        "stripe_id": "low"
+    }
+},
+{
+    "model": "team.account",
+    "pk": 3,
+    "fields": {
+        "name": "Level 2",
+        "org_limit": 4,
+        "team_limit": 10,
+        "budget": 47,
+        "description": "",
+        "stripe_id": "middle"
+    }
+},
+{
+    "model": "team.account",
+    "pk": 4,
+    "fields": {
+        "name": "Level 3",
+        "org_limit": 100,
+        "team_limit": 10000,
+        "budget": 99,
+        "description": "",
+        "stripe_id": "high"
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$BUpqrdnhFf2S$Mgruzr2WNUvLoHjJoL+FADtuwujdtl3WmN+toTnSKdc=",
+        "last_login": "2016-09-14T22:43:37.363Z",
+        "is_superuser": false,
+        "username": "kill",
+        "first_name": "",
+        "last_name": "",
+        "email": "kill@where.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-05-19T22:08:00.054Z",
+        "account": 3,
+        "is_temp": false,
+        "exp_date": "2016-06-28",
+        "last4_card_num": "4242",
+        "phone": null,
+        "customer_id": "cus_8XXG7R74gUbYpR",
+        "subscription_id": "sub_8XXGmkuSkElOFS",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$wnqbBbTY1Ggq$//mNxCKpZxEK4qEDPuax8vzbGgrUTF/tBpFPlNNfJSs=",
+        "last_login": "2016-05-30T23:32:24.513Z",
+        "is_superuser": true,
+        "username": "root",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@waff.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-05-19T23:28:47.771Z",
+        "account": null,
+        "is_temp": false,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$tcegS6kKFzVI$mXew/A8bgNi9Q8wGkyLnCoS3CSaSGDjAJ05gg+NXbDQ=",
+        "last_login": "2016-05-23T08:55:19.360Z",
+        "is_superuser": false,
+        "username": "john",
+        "first_name": "",
+        "last_name": "",
+        "email": "john@nice.one",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-05-20T16:36:38Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": "2016-06-22",
+        "last4_card_num": "4242",
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": "sub_8VFXyNr5zv0a8h",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$IXwqPLI8aM2o$LrWFMP66lpiPRJGaJMr5Hy8BgimNTJOI+YAf8HTay6w=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "jason",
+        "first_name": "",
+        "last_name": "",
+        "email": "jason@second.one",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-05-20T18:27:35.776Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$1vev2WEuG3jb$MuAAFVV+YSEWQcNcaMWjJMvpfNOOSSTndqdhDGTAH00=",
+        "last_login": "2016-09-14T22:51:23.969Z",
+        "is_superuser": false,
+        "username": "namingwaysway",
+        "first_name": "",
+        "last_name": "",
+        "email": "namingwaysway@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-01T18:36:00.257Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$X1QeTAr6dfKw$7RK1oXzIwjSBYNiSRDHSwCM8/7mKuwPmkR3GBTz1LyU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "hersh.tapadia",
+        "first_name": "",
+        "last_name": "",
+        "email": "hersh.tapadia@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-01T18:38:37.236Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$pAyLoyOsNr9M$hEo2F36R6BQbDVSaoqaNVObJAWqXsy2m0/MZK6q/6uQ=",
+        "last_login": "2016-06-04T02:57:03.805Z",
+        "is_superuser": false,
+        "username": "dan8931484",
+        "first_name": "",
+        "last_name": "",
+        "email": "dan8931484@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-04T02:13:10.594Z",
+        "account": 3,
+        "is_temp": false,
+        "exp_date": "2016-07-04",
+        "last4_card_num": "4242",
+        "phone": null,
+        "customer_id": "cus_8ZdZ7MLVtZM05g",
+        "subscription_id": "sub_8ZdZvY3yK2mhXw",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$qU444kIGOxSr$iA3A2G6s1gS8h68FR3pEyip0KziQ1Qw7fAExbS20mvA=",
+        "last_login": "2016-06-04T03:01:57.440Z",
+        "is_superuser": false,
+        "username": "jason.5001001",
+        "first_name": "",
+        "last_name": "",
+        "email": "jason.5001001@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-04T02:57:42.879Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$m4xX4dJb4aUz$oZ0ZJyXAW/uixz1xuwWCt6DmEmJo8+6xMUM+PsccQp0=",
+        "last_login": "2016-06-06T21:30:34.914Z",
+        "is_superuser": false,
+        "username": "who",
+        "first_name": "",
+        "last_name": "",
+        "email": "who@where.org",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-06-06T21:29:37.883Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$RSUcxxu2eKja$vUb+1rAAN4Tx2RUGJGTb0f5awtmveMClORB2GZAhDtM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysways",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysways@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T03:25:10.239Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$cT9rksv27PQy$C13Z1oNoYGjyAUHEFqv5t7H5P6eOI5NaE/bwo6EKZF4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+2",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+2@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T16:59:55.346Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 13,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$CPobGPEVbaW0$StR4mCYTUfQeqyfC46Ygm/CBCAnO1bRgw5S71OuLVDA=",
+        "last_login": "2016-08-25T18:04:04.322Z",
+        "is_superuser": false,
+        "username": "jeremy.freeman+demo1",
+        "first_name": "",
+        "last_name": "",
+        "email": "jeremy.freeman+demo1@raviolilabs.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T18:04:04.195Z",
+        "account": null,
+        "is_temp": false,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 14,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$H69Hm7mRH4GG$hPQa8cajUcUXvoBMQ8iDFeKsuZ1ermNF2IyyPCuVK0I=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "hersh.tapadia+test",
+        "first_name": "Hersh",
+        "last_name": "Tapadia",
+        "email": "hersh.tapadia+test@raviolilabs.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T18:05:35.034Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$qaXynC4vEGkK$ulYWs4mE79SZxRHGU8jBg/FNjOrHv89CqiH8kYnHacw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "jeremy.freeman",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "jeremy.freeman@raviolilabs.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T18:05:56.531Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$bZIYPDtSHt0N$EyPqsgZFAKHTgtY9qexWL+44drB+T+y4oowjqbK49wA=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "anyemail",
+        "first_name": "New Person",
+        "last_name": "Number 3",
+        "email": "anyemail@raviolilabs.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-08-25T18:06:17.209Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 17,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$ovy5O0tJ49Gh$8aQAPgVMjf+iBIOxBpVR2Da/Qozb3j7PAWlJm0TxHb0=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+email2",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+email2@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T01:47:01.751Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$EUZNeyYpk1e6$8rXoMIFCLPFJekVe4pYdsJPlWD/uxe7StggJiPnn7Wc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+4",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+4@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T01:47:51.387Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 19,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$PwLkCeGOgWy9$+pjGC78HuhYUXKtdwd89/7rm2vKwh1OV5yh4bZOkZf0=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+6",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+6@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T01:48:43.987Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 20,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$P7Ai8pWPKgT9$HUP33uCGXP8yhnl/26ehPfxLtEUv2kVBiFVhBaLy2xc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+5",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+5@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T01:58:12.196Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 21,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$3pirRHsjdzeC$CJTt7oWZgqx6Qy4SNetTN3q3c1KnToF/5CdjvKEDAM4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+7",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+7@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T02:04:55.341Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 22,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$E01gtSo82JYp$Ojj/hBvVLZ+WllHQ9vpAhR6n4pRSklKQb6h2zbjwNmw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+8",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+8@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T02:07:51.930Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 23,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$TgzAXWz4ve7n$9gv942gUzitycjOy6ZTUbwyU5u5g4zu30+EDA5/aso8=",
+        "last_login": "2016-09-12T02:29:56.062Z",
+        "is_superuser": false,
+        "username": "namingwaysway+14",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+14@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T02:25:35.124Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 24,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$W0Zk5kGknDAe$+pG3yWjb/4SF23Tkk5YlLm5ifjN0qRMY/5B8TSWiqiY=",
+        "last_login": "2016-09-12T02:48:45.828Z",
+        "is_superuser": false,
+        "username": "namingwaysway+15",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+15@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-12T02:43:35.722Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 25,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$bReznVqxgjIM$1YHK2p+n7UBHTmsscq+AG3Lmo923WiZSdO6xoBJ/gNw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "hersh.tapadia+2",
+        "first_name": "Hersh",
+        "last_name": "Tapadia",
+        "email": "hersh.tapadia+2@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-14T22:40:02.913Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 26,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$ciiTpWMKpuCU$qFaR7FVRcMZ+tuVYUHMFwsB6QiTIOsRIceDZSRxdIgg=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "namingwaysway+13134",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+13134@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-14T22:40:17.852Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 27,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$R9g0uapuhb7Y$k/uDlkfqppKsOMqhbuSalZGyXLafO5J3qy6s6jRJUDM=",
+        "last_login": "2016-09-14T22:42:43.025Z",
+        "is_superuser": false,
+        "username": "namingwaysway+343",
+        "first_name": "Jeremy",
+        "last_name": "Freeman",
+        "email": "namingwaysway+343@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-14T22:41:45.326Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.teamuser",
+    "pk": 28,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$wa8iQSHy1rlO$NtIPEsR6bdxY2cdEBR8zzmL3TmIuCquhYAf1s96dbtg=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "jim.mclean",
+        "first_name": "",
+        "last_name": "",
+        "email": "jim.mclean@learningmachines.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2016-09-14T22:44:17.689Z",
+        "account": null,
+        "is_temp": true,
+        "exp_date": null,
+        "last4_card_num": null,
+        "phone": null,
+        "customer_id": null,
+        "subscription_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "team.team",
+    "pk": 6,
+    "fields": {
+        "name": "oinrv",
+        "owner": 1,
+        "is_active": true,
+        "admin": [],
+        "member": [
+            15,
+            25
+        ],
+        "service": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "team.team",
+    "pk": 7,
+    "fields": {
+        "name": "New Demo Team",
+        "owner": 13,
+        "is_active": true,
+        "admin": [
+            15
+        ],
+        "member": [
+            15,
+            16
+        ],
+        "service": [
+            4,
+            5
+        ]
+    }
+}
+]

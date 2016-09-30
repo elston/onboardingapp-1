@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AllStacks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="{% static "css/build.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- Lightbox form css -->
+    <link href="{% static "css/lightbox-form.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% block extra_head %}{% endblock %}
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{% url 'dashboard' %}">
+                        a<span>ll</span>stacks
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'teams_list' %}">Teams</a>
+                </li>
+                <!--
+                {% if team %}
+                <li>
+                    <a href="{% url 'add_service' team.id %}">Tools</a>
+                </li>
+                {% endif %}
+                -->
+                <li>
+                    <a href="{% url 'organization_list' %}">Organization</a>
+                </li>
+                <li>
+                    <a href="{% url 'plan' %}">Profile</a>
+                </li>
+                <ul>
+                    <li>
+                        <a href="{% url 'account_change_password' %}">Settings</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <!-- Messages -->
+            <div id="messages-wrapper">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags and message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-message" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <!-- /Messages -->
+
+            <!-- Page Header -->
+            <div id="page-content-header" class="col-xs-12">
+                <i id="menu-toggle" class="fa fa-2x fa-bars pull-left" aria-hidden="true"></i>
+                <ol class="breadcrumb pull-left">
+                    {% block breadcrumb %}
+                    {% endblock  %}
+                </ol>
+                <a href="{% url 'account_logout' %}" class="pull-right">Logout</a>
+            </div>
+            <div class="container-fluid">
+                {% block main %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "js/custom.js" %}"></script>
+
+    <!-- Lightbox form-->
+    <script src="{% static "js/lightbox-form.js" %}"></script>
+
+    <script>
+     $("#menu-toggle").click(function(e) {
+         e.preventDefault();
+         $("#wrapper").toggleClass("toggled");
+     });
+    </script>
+
+    <script>
+     setTimeout(function() { $(".alert").hide('slow'); }, 15000);
+    </script>
+
+    {% block script %}
+    {% endblock %}
+
+</body>
+
+</html>

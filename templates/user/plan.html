@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="active">Profile</li>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div id="" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                {% if account %}
+                    <h3> Current Option: {{ account.name }} </h3>
+                    <hr>
+                    <p> Card number: **** **** **** {{ teamuser.last4_card_num }}</p>
+                    <p> Expiratoin Date: {{ teamuser.exp_date }}</p>
+                    <p> Bill Amount: ${{ account.budget }}</p><br>
+                    <p>You can create up to <b>{{ account.org_limit }}</b> organizations and <b>{{ account.team_limit }}</b> teams with this account.</p>
+                    <hr>
+                    <div class="pw-change team-info plan-btn">
+                        <a href="#" onclick="cancel_account();" class="acc-btns"> Cancel Account </a>
+                    </div>
+                {% else %}
+                    <h3> Current Option: Free </h3>
+                    <hr>
+                    <p> You don't have bill information. </p>
+                    <p> Your activity with this account is limited. </p>
+                    {% if teamuser.exp_date %}
+                        <p> You can manage your team(s) until {{ teamuser.exp_date }}. </p>
+                    {% endif %}
+                    <hr>
+                {% endif %}
+                <div class="pw-change team-info plan-btn">
+                    <a href="{% url 'update_account' %}" class="acc-btns"> Update Account </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Account Cancel Confirm Modal -->
+    <div id="account_cancel_dlg" title="Cancel current account" style="display:none;">
+        <form id="account-cancel-form">
+        {% csrf_token %}
+            <p>Your account is canceled after current expiration date.</p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static "js/jquery-ui.js" %}"></script>
+
+    <script>
+     function cancel_account()
+     {
+         $( "#account_cancel_dlg" ).dialog({
+             resizable: false,
+             height:230,
+             width:400,
+             modal: true,
+             buttons: {
+                 "Confirm": function() {
+                     $.post('{% url 'cancel_account' %}', {})
+                      .success(function(result){
+                          $( "#account_cancel_dlg" ).dialog( "close" );
+                          location.reload();
+                      });
+                 },
+                 Cancel: function() {
+                     $( this ).dialog( "close" );
+                     return false;
+                 }
+             }
+         });
+     }
+    </script>
+{% endblock %}

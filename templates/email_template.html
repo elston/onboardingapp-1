@@ -1,0 +1,34 @@
+<html>
+<head>
+	<div class="row">
+		<a class="footer-head" href="http://www.allstacks.com" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	    font-size: 32px; color: #333333; text-decoration: none;">a<span style="color: #2e75b6;">ll</span>stacks</a>
+	</div>
+</head>
+
+<body>
+	<div class="container" style="border: 1px solid #333333; padding:30px; margin-top:10px; margin-bottom:10px;">
+		<div class="row" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 20px; color: #2e75b6;">
+	    	<h2 style="color: #2e75b6;">{{ emailheader }}</h2>
+	    </div>
+		<div class="row" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	    font-size: 16px; color: #333333;">
+	    	{% autoescape off %}{{ emailbody }}{% endautoescape %}
+	    </div>
+	</div>
+</body>
+
+<footer> 
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 text-center">
+				<a class="footer-head" href="http://www.allstacks.com" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 32px; color: #333333; text-decoration: none;">a<span style="color: #2e75b6;">ll</span>stacks</a>
+			</div>
+			<div class="col-lg-4 col-md-4">
+				<p style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12px; color: #333333; text-decoration: none;">Copyright &#xA9;2016 Ravioli Labs, LLC</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+</html>

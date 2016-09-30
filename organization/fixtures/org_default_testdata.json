@@ -1,0 +1,26 @@
+[
+{
+    "model": "organization.organization",
+    "pk": 1,
+    "fields": {
+        "name": "adibvoi",
+        "description": "",
+        "owner": 1,
+        "team": [
+            6
+        ]
+    }
+},
+{
+    "model": "organization.organization",
+    "pk": 2,
+    "fields": {
+        "name": "New Demo Org",
+        "description": "",
+        "owner": 13,
+        "team": [
+            7
+        ]
+    }
+}
+]

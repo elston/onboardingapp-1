@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %}
+    {% if organization %}<li>{{ organization.name }}</li>{% endif %}
+    <li class="active">Teams</li>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label>Search By</label>
+                    <select id="teams-filter" class="form-control">
+                        <option value="-1">All teams</option>
+                        <option value="-2" {% if filter == -2 %}selected{% endif %}>Teams I manage</option>
+                        <option value="-3" {% if filter == -3 %}selected{% endif %}>Teams I'm on</option>
+                        {% for organization in orgs %}
+                            <option value="{{ organization.id }}" {% if filter == organization.id %}selected{% endif %}>Teams for organization {{ organization.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="addteam-div" class="row">
+            {% include "widgets/teams_list.html" %}
+
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <a href="javascript:void(0)" onclick="check()"><img src="{% static "img/addbox.png" %}" class="img-responsive"></a>
+                <h2 class="text-center text-muted">Add a Team</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="shadowing"></div>
+    {% include "widgets/create_team.html" %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static "js/team.js" %}"></script>
+
+    <script>
+     $( "#teams-filter" ).on('change', function() {
+         location.href = '/teams?filter=' + this.value;
+     });
+    </script>
+{% endblock %}

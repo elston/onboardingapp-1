@@ -1,0 +1,73 @@
+<div id="box2" class="panel panel-primary">
+
+    <div id="boxtitle">
+        <p id="lightbox_content_heading"></p>
+        <div class="panel-heading text-center">
+	    <h1 class="panel-title text-center" style="float:left">Add Tool or Service</h1>
+            <div style="float:right" id="close" onclick="closebox2()" ><i class="menu_btn fa fa-times"></i></div>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-lg-12 col-md-12 col-sm-12 grey-popup3">
+            <div class="col-lg-6 col-md-6 col-sm-4 col-xs-5 vertical-hr">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
+                    <div class="form-group">
+                        <input id="search-field" type="text" placeholder="Search fot tool/service">
+                    </div>
+                </div>
+
+                <!--Hide in xs-->
+                <div id="raio-lgbox" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs noPadMar">
+                    <div id="services" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar" style="max-height: 270px; overflow-y:auto;">
+                        {% for service in other_services %}
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div id="{{ service|lower }}Box" class="tools-border" onclick="highlight_box2('{{ service|lower }}Box', 'id_{{ service }}', {{ other_services }})">
+                                    <img src="/static/img/team/{{ service|lower }}-sm.png" class="img-responsive">
+                                </div>
+                                <div class="radio radio-primary text-center">
+                                    <input type="radio" id="id_{{ service }}" value="{{ service }}" name="s_name" aria-label="Single radio One">
+                                    <label></label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!--Show in xs-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md hidden-sm noPadMar">
+                    <div id="services-xs" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
+                        {% for service in other_services %}
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                <div class="text-center">
+                                    <label>{{ service }}</label>
+                                </div>
+                                <div class="radio radio-primary text-center">
+                                    <input type="radio" id="id_{{ service }}" value="{{ service }}" name="s_name" aria-label="Single radio One">
+                                    <label></label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                <form id="add-service-form" method="post">
+                {% csrf_token %}
+                    <div id="service-form">
+                        <div class="form-group">
+                            <p class="noPadMar">Please select the Service</p>
+                        </div>
+                    </div>
+                    <input name="team" hidden value="{{ team.id }}">
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Add Tool">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

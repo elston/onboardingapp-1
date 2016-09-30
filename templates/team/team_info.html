@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %}
+    <li>{{ organization.name }}</li>
+    <li class="active">{{ team.name }}</li>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div id="" class="row">
+            {% if user == team.owner %}
+                <a href="/team/{{team.id}}/delete"> Delete this team </a>
+            {% endif %}
+        </div>
+        <div id="" class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="pull-right lftFaHd" onclick="openbox('', 0)"><i class="fa fa-2x fa-plus" aria-hidden="true"></i></p>
+                </div>
+                <div class="team-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="teambox-title"  class="col-lg-12">
+                        <h5>MEMBERS</h5>
+                    </div>
+                    <div id="members" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {% for member in members %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box">
+                            <p class="noPadMar">{% if member.first_name %} {{ member.first_name }} {% endif %} {% if member.last_name %} {{ member.last_name }} {% endif %} {{ member.email }}</p>
+                            <p class="pull-right lftFa"><a href="#" onclick="remove_member({{ member.id }}, {{ team.id }});"><i class="fa fa-trash" aria-hidden="true"></i></a></p>
+                            {% if user == team.owner %}
+                                {% if member not in admins %}
+                                    <a href="{% url 'add_admin' team.id member.id %}"><i>Make Admin</i></a>
+                                {% else %}
+                                    <a href="{% url 'remove_admin' team.id member.id %}"><i>Revoke Admin</i></a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="pull-left lftFaHd" onclick="openbox2('', 0)"><i class="fa fa-2x fa-plus" aria-hidden="true"></i></p>
+                    <p id="listIcon" class="pull-right rghtFa"><i class="fa fa-2x fa-bars" aria-hidden="true"></i></p>
+                    <p id="tilesIcon" class="pull-right rghtFa"><i class="fa fa-2x fa-th-large" aria-hidden="true"></i></p>
+                </div>
+                <div class="tools-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="tools-title"  class="col-lg-12">
+                        <h5>TOOLS</h5>
+                    </div>
+
+                    <div id="tiles" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
+                            {% for service in services %}
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="tools-border" style="overflow:hidden;">
+                                    <img src="/static/img/team/{{ service.name|lower }}-sm.png" class="img-responsive" style="max-width: 100%;max-height: 100%;">
+                                </div>
+                                <h2 style="width: 70%; overflow: hidden;">{% if service.team_name %}{{ service.team_name }}{% else %}{{ service.org_name }}{% endif %}</h2>
+                                <p class="pull-right lftFa" onclick="remove_service({{ service.id }}, {{ team.id }});"><i class="fa fa-trash" aria-hidden="true"></i></p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div id="list" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {% for service in services %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box">
+                            <p class="noPadMar">{{ service.name }} {% if service.team_name %}{{ service.team_name }}{% else %}{{ service.org_name }}{% endif %}</p>
+                            <p class="pull-right lftFa" onclick="remove_service({{ service.id }}, {{ team.id }});"><i class="fa fa-trash" aria-hidden="true"></i></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if request.user in admins %}
+                    {% if services %}
+                        <div class="team-info pw-change">
+                            <a href="{% url 'additional_info' team.id %}" class="acc-btns">Additional information for the services</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        {% if error_log %}
+            <div style="margin-top: 30px;"></div>
+            <div id="" class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {% regroup error_log by user as error_list %}
+                        <h4>Error Log</h4>
+                        <ul>
+                            {% for user in error_list %}
+                            <li>{{ user.grouper }}
+                                <ul style="line-height: 1.5">
+                                    {% for item in user.list %}
+                                        <form action="{% url 'remove_error_log' item.id %}" method="post">
+                                        {% csrf_token %}
+                                            <button type="submit" style="color: red; opacity: 1;" class="close"><span aria-hidden="true">&times;</span></button>
+                                        </form>
+                                        <li>{{ item.service }}: {{ item.text }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <div id="shadowing"></div>
+    <div id="box" class="panel panel-primary">
+        <div id="boxtitle">
+            <p id="lightbox_content_heading"></p>
+            <div class="panel-heading text-center">
+	        <h1 class="panel-title text-center" style="float:left">Add Team Memeber</h1>
+                <div style="float:right" id="close" onclick="closebox()" ><i class="menu_btn fa fa-times"></i></div>
+            </div>
+        </div>
+
+        <div>
+            <form id="user-invite-form" method="post" onsubmit="invite_team_member(); return false;">
+            {% csrf_token %}
+                <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
+                    {% for item in invite_form %}
+                        {% if item.name == 'admin' %}
+                        <div id="adminChkBox" class="checkbox checkbox-primary text-center">
+                            {{ item }}
+                            <label for="checkbox2">{{ item.label }}</label>
+                        </div>
+                        {% else %}
+                        <div class="form-group">
+                            {{ item }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Invite">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    {% include "widgets/add_tools.html" %}
+
+    <div id="loading-data" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{% static "img/load.gif" %}" height="32" width="32"><span style="padding-left: 10px;">Loading data from service...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <!-- team -->
+    <script src="{% static "js/team.js" %}"></script>
+
+    <!-- services -->
+    <script src="{% static "js/services.js" %}"></script>
+
+    <script>
+     $("#listIcon").click(function(){
+         $("#tiles").hide();
+         $("#list").show();
+     });
+     $("#tilesIcon").click(function(){
+         $("#list").hide();
+         $("#tiles").show();
+     });
+    </script>
+
+    <script>
+     $(document).ready(function() {
+         $.ajax({
+             type: "post",
+             url: "/team/members/get-email",
+             data: {'t_id': {{ team.id }}},
+             beforeSend: function(){
+                 $('#members').append('<div id="loading" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box"><p class="noPadMar"><img src="/static/img/load.gif" height="32" width="32"><span style="padding-left: 10px;">Loading data from service...</span></p></div');
+             },
+             success: function (data) {
+                 var emails_list = data.emails;
+                 var length = emails_list.length;
+                 $('#loading').remove();
+                 for (var i=0; i<length; i++) {
+                     $('#members').append('<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box"><p class="noPadMar" style="color: #bbb;">' + emails_list[i] + '</p><a href="javascript:invite_team_member(' + "'" + emails_list[i] + "'" + ', ' + '{{ team.id }}' + ');" class="btn-xs btn-primary" style="color: white;">Invite</a></div>');
+                 }
+             }
+         });
+     });
+    </script>
+{% endblock %}

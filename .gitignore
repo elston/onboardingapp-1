@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+.DS_Store
+.coverage
+.idea
+env/
+staticfiles/

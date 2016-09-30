@@ -1,0 +1,43 @@
+{% extends "base_nonav.html" %}
+
+{% block main %}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+        <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 bg-grey">
+
+                <form method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                    <h2>Sign In</h2>
+                    <div class="form-group">
+                        {{ form.non_field_errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_login">Email Address</label>
+                        {{ form.login.errors }}
+                        <input id="id_login" name="login" autofocus type="email" {% if form.login.value %}value={{ form.login.value }}{% endif %}>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password</label>
+                        {{ form.password.errors }}
+                        <input id="id_password" name="password" type="password" >
+                    </div>
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Sign in!">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-center"><a href="{% url 'account_reset_password' %}" >Forgot Password?</a> Click here to reset</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-center">New to allstacks? <a href="{{ signup_url }}" >Register Here</a></label>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>alltacks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">a<span>ll</span>stacks</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="navBar" class="nav navbar-nav navbar-right">
+                    <li onclick="scrollNav('allstack-section', this)">
+                        <a href="javascript:void(0)">AllStacks</a>
+                    </li>
+                    <li onclick="scrollNav('package-section', this)">
+                        <a href="javascript:void(0)">Pricing</a>
+                    </li>
+                    <li onclick="scrollNav('services-section', this)">
+                        <a href="javascript:void(0)">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{% static "img/home-bg.png" %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>a<span>ll</span>stacks</h1>
+                        <h2>MAKING ONBOARDING AND TOOL MANAGEMENT</h2>
+                        <h3>SIMPLE / <span>FAST</span> / EFFICIENT</h3>
+                    </div>
+                    <div class="form-group text-center">
+                        <form method="get" action="{% url 'account_signup' %}">
+                            <input type="text" placeholder="Enter Email">
+                            <input type="submit" value="Sign Me Up!">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- AllStack Section -->
+    <div id="allstack-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>a<span>ll</span>stacks</h1>
+                    <p>Allstacks centralizes management of your organizations tools and services. Whether it's Github, Slack, or Salesforce, with Allstacks you can quickly onboard and offboard your employees with just an email address. No more corraling multiple administrators to setup all of your different tools.</p>
+                </div>
+                <div id="allstack-services" class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <img src="{% static "img/icons/people.png" %}">
+                        <h2>1. Create A Team</h2>
+                        <p>Enter a few key descriptors of your team: is it sales, marketing, development? Allstacks suggests tools based on your team archetype.</p>
+                        <!--<input type="button" value="Learn More">-->
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <img src="{% static "img/icons/world.png" %}">
+                        <h2>2. Select Tools/Services</h2>
+                        <p>Allstacks is integrated with all the most used, popular tools and services, just select the ones your team uses.</p>
+                        <!--<input type="button" value="Learn More">-->
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+                        <img src="{% static "img/icons/envelop.png" %}">
+                        <h2>3. Onboard Users</h2>
+                        <p>Allstacks automatically populates the users from your selected tools. Just confirm your teammates and invite any new hires!</p>
+                        <!--<input type="button" value="Learn More">-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Package Section -->
+    <div id="package-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-center packg-box" onclick="packgClick(this)">
+                        <div class="upper-box">
+                            <h2>Startup</h2>
+                            <h1>$0</h1>
+                            <p>per month</p>
+                        </div>
+                        <div class="lower-box">
+                            <p>1 Team</p>
+                            <p>Up to 5 Users</p>
+                            <p></p>
+                            <p>Get Started with Allstacks</p>
+                            <input type="button" value="Sign Me Up!">
+                        </div>
+                    </div>
+                    <div id="stndrdBox" class="col-lg-3 col-md-3 col-sm-3 text-center packg-box" onclick="packgClick(this)">
+                        <div class="upper-box">
+                            <h2>Pro</h2>
+                            <h1>$3</h1>
+                            <p>per user per month</p>
+                        </div>
+                        <div class="lower-box">
+                            <p>Unlimited Teams</p>
+                            <p>Unlimited Users</p>
+                            <p>Unlimited Tools</p>
+                            <input type="button" value="Sign Me Up!">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                        <h1><span>Simple</span> Pricing</h1>
+                        <h3>Get started for free</h3>
+                        <h3>Only pay for what you use</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h1>We <span>Love</span> Tools</h1>
+                    <p class>Allstacks works with the most popular tools and services on the market to make your onboarding process easier. We are continuously integrating and adding more tools to broaden our coverage. Our goal is to make managing your teams easier.</p>
+                    <center>
+                    <ul>
+                        <li><img src="{% static "img/services/github.png" %}" class="img-responsive"></li>
+                        <li><img src="{% static "img/services/dropbox.png" %}" class="img-responsive"></li>
+                        <li><img src="{% static "img/services/jira.png" %}" class="img-responsive"></li>
+                        <li><img src="{% static "img/services/salesforce.png" %}" class="img-responsive"></li>
+                        <li><img src="{% static "img/services/toggle.png" %}" class="img-responsive"></li>
+                        <li><img src="{% static "img/services/trello.png" %}" class="img-responsive"></li>
+                    </ul>
+                    </center>
+                    <p class="text-center">and many more!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Get Started Section -->
+    <div id="getstarted-section">
+        <div class="container">
+            <div class="row">
+                <form method="get" action="{% url 'account_login' %}" onsubmit="return false">
+                    <div class="col-lg-12 col-md-12">
+                        <h1>Get Started With Allstacks</h1>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-6 col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <input type="text" placeholder="Email Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <input type="submit" value="Sign Me Up!">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer Border-->
+    <div id="footer-border">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
+            <div id="yellowDiv" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            </div>
+            <div id="blueDiv" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            </div>
+            <div id="orangeDiv" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 text-center">
+                    <a class="footer-head" href="/">a<span>ll</span>stacks</a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <p class="copyright text-muted">Copyright &copy;2016 Ravioli Labs, LLC</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{% static "js/jquery.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "js/custom.js" %}"></script>
+
+    <script>
+        function scrollNav(idd, activeli){
+
+            $('#navBar li').removeClass("active");
+            $(activeli).addClass("active");
+
+            $('html, body').animate({
+                scrollTop: $("#"+idd).offset().top
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        function packgClick(pckgDiv){
+            $('.packg-box').css('transform', 'scale(1)');
+            $(pckgDiv).css('transform', 'scale(1.1)');
+            $(pckgDiv).css('zIndex', '999');
+
+        }
+            $('#stndrdBox').css('transform', 'scale(1.1)');
+            $('#stndrdBox').css('zIndex', '999');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block breadcrumb %}
+    <li class="active">Organization</li>
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label>Search By</label>
+                    <select id="organizations-filter" class="form-control">
+                        <!-- <option>The name of each organization the user is a member of</option>-->
+                        <option value="-1">All organizations</option>
+                        <option value="-2" {% if filter == -2 %}selected{% endif %}>Organizations I manage</option>
+                        <option value="-3" {% if filter == -3 %}selected{% endif %}>Organizations I'm on</option>
+                        <!-- <option>Teams for organization</option>-->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-organization" class="row">
+            {% if organizations %}
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                {% for org in organizations %}
+                <div class="team-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="teambox-title"  class="col-lg-12">
+                        <a href="{% url 'detail_organization' org.id %}"><h5>{{ org.name }}</h5></a>
+                    </div>
+                    {% if org.description %}
+                        <div class="col-lg-12 noPadMar"><p>{{ org.description }}</p></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <a href="javascript:void(0)" onclick="check()"><img src="{% static "img/add-org.png" %}" class="img-responsive"></a>
+                <h2 class="text-center text-muted">Add an Organization</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="shadowing"></div>
+    <div id="box2" class="panel panel-primary">
+        <div id="boxtitle">
+            <p id="lightbox_content_heading"></p>
+            <div class="panel-heading text-center">
+	        <h1 class="panel-title text-center" style="float:left">Create Organization</h1>
+                <div style="float:right" id="close" onclick="closebox2()" ><i class="menu_btn fa fa-times"></i></div>
+            </div>
+        </div>
+	<div>
+            <form id="create-organization-form" method="post" action="{% url 'organization_list' %}">
+            {% csrf_token %}
+                <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
+                    {% for item in form %}
+                    <div class="form-group">
+                        {{ item }}
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Create">
+                    </div>
+                </div>
+            </form>
+	</div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+     $("#create-organization-form").on('submit', function() {
+         var frm = $("#create-organization-form");
+         $("#create-organization-form").find('.error').remove();
+
+         $.ajax({
+             type: frm.attr('method'),
+             url: frm.attr('action'),
+             data: frm.serialize(),
+             success: function (result) {
+                 location.reload();
+             },
+             error: function (data, status) {
+                 var json = JSON.parse(data.responseText);
+                 var errors = json['response'];
+
+                 for (var k in errors) {
+                     $("#create-organization-form").find('input[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
+                 }
+             },
+         });
+
+         return false;
+     });
+    </script>
+
+    <script>
+     $("#organizations-filter").on('change', function() {
+         location.href = '/organization?filter=' + this.value;
+     });
+    </script>
+
+    <script>
+     function check(){
+         $.ajax({
+             type: 'post',
+             url: '/organization/limit/check',
+             data: {},
+             success: function (result) {
+                 openbox2('', 0);
+
+             },
+             error: function (data, status) {
+                 var json = JSON.parse(data.responseText);
+                 var error = json['response'];
+                 $("#messages-wrapper").append('<div class="alert alert-danger alert-message" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + error + '</div>');
+             },
+         });
+     }
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div id="" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <h3>Welcome to team: {{ team.name }}</h3>
+                <h4>Now the following services are available for you in this team</h4>
+                <ul name='services'>
+	            {% for service in services %}
+		        <li>{{ service.name }}</li>
+	            {% endfor %}
+                </ul>
+                <p>You can see more detailed information about your team <a href="{% url 'myteam_info' team.id %}">here</a>.</p>
+                {% if teamuser.is_temp %}
+	            <p><b>Note:</b> Please change your password <a href="{% url 'account_change_password' %}">here</a>.</p>
+                {% endif%}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

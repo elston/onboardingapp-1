@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Additional information</li>
+{% endblock %}
+
+
+{% block main %}
+    <div class="container-fluid">
+
+        <div id="" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <h3> My Team: {{ team.name }} </h3>
+                <h4> Manager: {{ team.owner.email }} </h4>
+
+                <table class="table table-hover pw-change">
+                    <caption style="font-size: 14px;">Service List</caption>
+                    <tbody>
+                        {% for key, item in result.items %}
+                            <form id="{{ key.id }}" method="post" action="{% url 'add_additional_info' team.id %}" onsubmit="add_service_info('{{key.id}}'); return false">
+                                <tr>
+                                    <td class="form-group" style="vertical-align: middle;">
+                                        <input type="hidden" name="key" value="{{ key.id }}">
+                                        {{ key }}: {% if key.team_name %}{{ key.team_name }}{% else %}{{ key.org_name }}{% endif %}
+                                    </td>
+                                    <td class="form-group">
+                                        <input name="data" {% if item %}value="{{ item.data }}"{% endif %}>
+                                    </td>
+                                    <td class="team-info add-info" style="vertical-align: middle;">
+                                        <button type="submit" class="acc-btns">Update</button>
+                                    </td>
+                                </tr>
+                            </form>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% if accept_invitation %}
+                    <div class="team-info pw-change">
+                        <a href="{% url 'accept_invitation_step2' team.id request.user.id %}" class="acc-btns">Accept invitation Step 2 &raquo;</a>
+                    </div>
+                {% else %}
+                    <div class="team-info pw-change">
+                        <a href="{% url 'myteam_info' team.id %}" class="acc-btns">Team page &raquo;</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+     function add_service_info(t_id)
+     {
+
+         var frm = $( "#" + t_id );
+
+         $.ajax({
+             type: frm.attr('method'),
+             url: frm.attr('action'),
+             data: frm.serialize(),
+             success: function (data) {
+                 location.reload();
+             },
+             error: function(data, status) {
+                 location.reload();
+             },
+         });
+
+     }
+    </script>
+{% endblock %}
