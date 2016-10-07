@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block breadcrumb %}
     <li class="active">Dashboard</li>
@@ -47,12 +48,26 @@
                 {% endif %}
                 </div>
             {% else %}
+      
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     Hey, you don't have any teams!  Add one to get started!
                 <div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                    <a href="javascript:void(0)" onclick="check()"><img src="{% static "img/addbox.png" %}" class="img-responsive"></a>
+                    <h4 class="text-center text-muted">Add a Team</h2>                    
+                </div>     
+
             {% endif %}
         </div>
 
     </div>
 
+    <div id="shadowing"></div>    
+    {% include "widgets/create_team.html" %}
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static "js/team.js" %}"></script>
 {% endblock %}

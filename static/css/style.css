@@ -862,6 +862,14 @@ h5{
     float: right;
 }
 
+#errlog-title{
+    background-color: #b3bc20;
+    background-position: right;
+    background-repeat: no-repeat;
+    padding: 10px 15px;
+    box-shadow: 0 3px 1px 0 rgba(0,0,0,0.4),0 0px 0px 0 rgba(0,0,0,0.16);
+}
+
 .lftFa{
     margin: 0 !important;
     padding: 0 10px !important;

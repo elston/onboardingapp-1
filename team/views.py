@@ -35,7 +35,12 @@ from .models import (
 )
 from .common import check_emails_list_for_team_members
 from .common import send_email_message
-from .forms import UserInviteForm, CreateTeamForm1, CreateTeamForm2
+from .forms import \
+    UserInviteForm,\
+    CreateTeamForm1,\
+    CreateTeamForm2,\
+    TeamEditForm,\
+    ChangeTeamOwnerForm
 
 
 class TeamsList(ListView):
@@ -130,9 +135,16 @@ def dashboard(request):
         unique_members = list(unique_members_set)
         result[service] = len(unique_members)
 
+    orgs = Organization.objects.filter(owner=request.user).exists()
+    if orgs:
+        form = CreateTeamForm1(request.POST)
+    else:
+        form = CreateTeamForm2(request.POST)
+
     context = {
         'teams': teams,
-        'services_list': result
+        'services_list': result,
+        'form':form,
     }
     return render(request, template_name, context)
 
@@ -168,6 +180,7 @@ def team_info(request, id):
         raise Http404
 
     members = team.member.all()
+    invites = team.invited.all()
     team_services = team.service.all()
 
     error_log = ErrorLog.objects.filter(team=team).order_by('user')
@@ -179,15 +192,29 @@ def team_info(request, id):
 
     form = UserInviteForm(initial={'team': team.pk})
 
+    teamedit_form = TeamEditForm(initial={
+        'team': team.pk,
+        'name': team.name,
+        'description': team.description,        
+    })
+
+    changeteamowner_form = ChangeTeamOwnerForm(
+        team=team,
+        initial={'team': team.pk}        
+    )
+
     context = {
         'team': team,
         'members': members,
+        'invites':invites,
         'admins': admins,
         'services': team_services,
         'error_log': error_log,
         'other_services': other_services,
         'organization': organization,
         'invite_form': form,
+        'teamedit_form':teamedit_form,
+        'changeteamowner_form':changeteamowner_form,
     }
 
     return render(request, template_name, context)
@@ -442,7 +469,7 @@ def accept_invitation_step1(request, m_id, t_id):
         logout(request)
         return redirect(reverse_lazy('account_login')+'?next='+url)
 
-    team = Team.objects.filter(id=t_id, member=teamuser)
+    team = Team.objects.filter(id=t_id, invited=teamuser)
     if team:
         team = team[0]
         services = team.service.all()
@@ -495,7 +522,7 @@ def accept_invitation_step2(request, m_id, t_id):
         logout(request)
         return redirect(reverse_lazy('account_login'), kwargs={'next': url})
 
-    team = Team.objects.filter(id=t_id, member=teamuser)
+    team = Team.objects.filter(id=t_id, invited=teamuser)
     if team:
         team = team[0]
         services = team.service.all()
@@ -504,6 +531,9 @@ def accept_invitation_step2(request, m_id, t_id):
         for service in services:
             ObjClass = getattr(eval(service.name), service.name)()
             ObjClass.add_member_individual(teamuser, service, team)
+
+        team.member.add(teamuser)
+        team.invited.remove(teamuser)        
 
         context = {
             'teamuser': teamuser,
@@ -585,6 +615,110 @@ def create_team(request):
 
         return JsonResponse({'response': response}, status=400)
 
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def edit_team(request):
+    # ...
+    form = TeamEditForm(request.POST)
+    if form.is_valid():
+        # ...
+        team_id = form.cleaned_data['team']
+        team  = Team.objects.get(id=team_id)
+        # ..
+        if team.owner != request.user:
+            messages.error(request, 'You don\'t have permission')
+            return JsonResponse({}, status=403)
+
+        team.name = form.cleaned_data['name']
+        team.description = form.cleaned_data['description']
+        team.save()
+
+        # ...
+        messages.success(request, 'The team {} was edit successfully'.format(team.name))
+        # data = {'href': '/team/' + str(team.id)}
+        data = {'ok':0}
+        return JsonResponse(data, status=200)
+
+    else:
+        response = {}
+        for k in form.errors:
+            response[k] = form.errors[k][0]
+
+        return JsonResponse({'response': response}, status=400)
+
+
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def changeteamowner_team(request):
+    # ...
+    print(request.POST)
+    form = ChangeTeamOwnerForm(request.POST)
+    if form.is_valid():
+        # ...
+        owner = form.cleaned_data['owner']
+        team_id = form.cleaned_data['team']
+        team  = Team.objects.get(id=team_id)
+        # ...
+        email_body = """
+        You've got an invitation to become team owner for team <b>%s</b> <br />
+        You can to become team owner once you accept the invitation at the following link <br /><br />
+        http://www.allstacks.com/team/%i/member/%i/accept-changeteamowner <br /> <br />
+        Thank you, <br />
+        Allstacks team
+        """ % (team.name, team.id, owner.id)
+        # ...
+        header_string = 'Dear {},'.format(owner.email)        
+        if len(owner.first_name) > 0:
+            header_string = 'Dear {},'.format(owner.first_name)
+           
+        # ....
+        send_email_message(email_body, header_string, 
+            'Allstacks Team changes for {}'.format(team.name), 
+            owner.email
+        )        
+        # ..
+        messages.success(request, 
+            'The team member {} was invited to'
+            ' become the team owner successfully'.format(owner.username)
+        )
+        return JsonResponse({'ok':0}, status=200)
+
+    else:
+        response = {}
+        for k in form.errors:
+            response[k] = form.errors[k][0]
+
+        return JsonResponse({'response': response}, status=400)  
+
+
+
+@login_required
+def accept_changeteamowner(request, t_id, m_id):
+    teamuser = get_object_or_404(TeamUser, id=m_id)
+
+    if teamuser != request.user:
+        messages.error(request, 'You don\'t have permission')
+        url = request.path
+        logout(request)
+        return redirect(reverse_lazy('account_login'), kwargs={'next': url})
+
+    team = Team.objects.get(id=t_id)
+    if team:
+        # ...
+        team.owner = teamuser
+        team.save()
+        # ..
+        context = {
+            'team': team
+        }
+        return render(request, 'user/accept_changeteamowner.html', context)
+    else:
+        err = 'You are not a member of this team or team doesn\'t exist!'
+        messages.error(request, err)
+        return redirect(reverse_lazy('dashboard'))        
+
 
 @login_required
 @require_http_methods(["POST"])
@@ -632,6 +766,35 @@ def remove_member(request):
             item.delete()
 
     messages.success(request, 'The member is removed successfully!')
+    return JsonResponse({}, status=200)
+
+
+@login_required
+@require_http_methods(["POST"])
+@csrf_exempt
+def remove_invite(request):
+    t_id = request.POST.get('t_id')
+    team = None
+
+    try:
+        team = Team.objects.get(id=t_id)
+    except Team.DoesNotExist:
+        messages.error(request, 'Team does not exist')
+        return JsonResponse({}, status=404)
+
+    if team:
+        admins = team.admin.all()
+
+    if not team or (request.user != team.owner and request.user not in admins):
+        messages.error(request, 'You don\'t have permission')
+        return JsonResponse({}, status=403)
+
+    m_id = request.POST.get('m_id')
+    teamuser = TeamUser.objects.get(id=m_id)
+    team.invited.remove(teamuser)
+
+
+    messages.success(request, 'The invite is removed successfully!')
     return JsonResponse({}, status=200)
 
 
@@ -694,12 +857,8 @@ def invite_user(request):
             )
 
         # check he is already there
-        team.member.add(teamuser)
+        team.invited.add(teamuser)        
 
-        if form.cleaned_data['admin']:
-            team.admin.add(teamuser)
-
-        team.save()
 
         if len(teamuser.first_name) > 0:
             header_string = 'Dear {},'.format(teamuser.first_name)

@@ -76,11 +76,70 @@ function invite_team_member(email, team_id)
     return false;
 }
 
-function remove_member(m_id, t_id)
-{
-    var r = confirm("Are you sure to remove this member?");
+function save_team_edtbox(){
+    // ...
+    var frm = $("#team-edit-form");
+    $("#team-edit-form").find('.error').remove();
+    var data = frm.serialize();
+    // ..
+    $.ajax({
+        type: "post",
+        url: "/team/edit",
+        data: data,
+        success: function (result) {
+            location.reload();
+        },
+        error: function (data, status) {
+            if (data.status == 400) {
+                var json = JSON.parse(data.responseText);
+                var errors = json['response'];
+
+                for (var k in errors) {
+                    $("#team-edit-form").find('input[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
+                }
+            } else {
+                location.reload();
+            }
+        },
+    });
+    return false;
+};
+
+
+function save_changeteamowner_box(){
+    // ...
+    var frm = $("#changeteamowner-form");
+    $("#changeteamowner-form").find('.error').remove();
+    var data = frm.serialize();
+    // ..
+    $.ajax({
+        type: "post",
+        url: "/team/changeteamowner",
+        data: data,
+        success: function (result) {
+            location.reload();
+        },
+        error: function (data, status) {
+            if (data.status == 400) {
+                var json = JSON.parse(data.responseText);
+                var errors = json['response'];
+
+                for (var k in errors) {
+                    $("#team-edit-form").find('input[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
+                }
+            } else {
+                location.reload();
+            }
+        },
+    });
+    return false;
+};
+
+
+function remove_chlen(chlen,m_id, t_id){
+    var r = confirm("Are you sure to remove this "+chlen+"?");
     if (r == true) {
-        $.post('/team/member/remove', {'m_id': m_id, 't_id': t_id})
+        $.post('/team/'+chlen+'/remove', {'m_id': m_id, 't_id': t_id})
             .success(function(result){
                 location.reload();
             })
@@ -90,4 +149,12 @@ function remove_member(m_id, t_id)
     } else {
         return false;
     }
-}
+};
+
+function remove_member(m_id, t_id){
+    remove_chlen('member',m_id, t_id);
+};
+
+function remove_invite(m_id, t_id){
+    remove_chlen('invite',m_id, t_id);
+};

@@ -4,18 +4,16 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from . import enums
 
 class Service(models.Model):
-    SERVICES = ()
-    import services
-    for service in services.__all__:
-        SERVICES += ((service, service),)
+
     """
     Service models.Model
     named for Github
     needs to be modified
     """
-    name = models.CharField(choices=SERVICES, max_length=50)
+    name = models.CharField(choices=enums.SERVICES, max_length=50)
     # password-bitbucket, team_token-slack, password-jira,
     # token in hipchat, token in trello
     token = models.CharField(max_length=200, null=True, blank=True)
@@ -28,7 +26,19 @@ class Service(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.name
+        return '{} ({})'.format(self.name,self.team_name)
+
+    @property
+    def login_url(self):
+        import services
+        module = getattr(services, self.name)
+        ObjClass = getattr(module, self.name)()
+        # ...
+        method = getattr(ObjClass,'login_url',None)        
+        if method:
+            return ObjClass.login_url()
+        # ..
+        return ''
 
 
 class Account(models.Model):
@@ -74,6 +84,8 @@ class Team(models.Model):
     admin = models.ManyToManyField(TeamUser, related_name="admin")
     member = models.ManyToManyField(
         TeamUser, related_name='team_member', blank=True)
+    invited = models.ManyToManyField(
+        TeamUser, related_name='team_invited', blank=True)
     service = models.ManyToManyField(
         Service, related_name='team_service', blank=True)
     is_active = models.BooleanField(default=True)

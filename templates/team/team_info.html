@@ -11,6 +11,10 @@
 
         <div id="" class="row">
             {% if user == team.owner %}
+                <a href="#" onclick="open_team_editbox('', 0)">Edit this team</a>  
+                &nbsp;|&nbsp;  
+                <a href="#" onclick="open_changeteamowner_box('', 0)">Change team owner</a>                  
+                &nbsp;|&nbsp;                  
                 <a href="/team/{{team.id}}/delete"> Delete this team </a>
             {% endif %}
         </div>
@@ -19,6 +23,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <p class="pull-right lftFaHd" onclick="openbox('', 0)"><i class="fa fa-2x fa-plus" aria-hidden="true"></i></p>
                 </div>
+
                 <div class="team-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div id="teambox-title"  class="col-lg-12">
                         <h5>MEMBERS</h5>
@@ -39,6 +44,23 @@
                         {% endfor %}
                     </div>
                 </div>
+
+                {% if invites %}
+                <div class="team-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="teambox-title"  class="col-lg-12" style="background-color: #ddbdff;">
+                        <h5>INVITED</h5>
+                    </div>
+                    <div id="invited" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {% for invite in invites %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 invites-box">
+                            <p class="noPadMar">{% if invite.first_name %} {{ invite.first_name }} {% endif %} {% if invite.last_name %} {{ invite.last_name }} {% endif %} {{ invite.email }}</p>
+                            <p class="pull-right lftFa"><a href="#" onclick="remove_invite({{ invite.id }}, {{ team.id }});"><i class="fa fa-trash" aria-hidden="true"></i></a></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}                
+
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -56,9 +78,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPadMar">
                             {% for service in services %}
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="tools-border" style="overflow:hidden;">
-                                    <img src="/static/img/team/{{ service.name|lower }}-sm.png" class="img-responsive" style="max-width: 100%;max-height: 100%;">
-                                </div>
+                                <a href="{{ service.login_url }}" target="_blank">
+                                    <div class="tools-border" style="overflow:hidden;">
+                                        <img src="/static/img/team/{{ service.name|lower }}-sm.png" class="img-responsive" style="max-width: 100%;max-height: 100%;">
+                                    </div>
+                                </a>                                
                                 <h2 style="width: 70%; overflow: hidden;">{% if service.team_name %}{{ service.team_name }}{% else %}{{ service.org_name }}{% endif %}</h2>
                                 <p class="pull-right lftFa" onclick="remove_service({{ service.id }}, {{ team.id }});"><i class="fa fa-trash" aria-hidden="true"></i></p>
                             </div>
@@ -89,30 +113,91 @@
             <div style="margin-top: 30px;"></div>
             <div id="" class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        {% regroup error_log by user as error_list %}
-                        <h4>Error Log</h4>
-                        <ul>
-                            {% for user in error_list %}
-                            <li>{{ user.grouper }}
-                                <ul style="line-height: 1.5">
-                                    {% for item in user.list %}
-                                        <form action="{% url 'remove_error_log' item.id %}" method="post">
-                                        {% csrf_token %}
-                                            <button type="submit" style="color: red; opacity: 1;" class="close"><span aria-hidden="true">&times;</span></button>
-                                        </form>
-                                        <li>{{ item.service }}: {{ item.text }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                    <div id="errlog-title"  class="col-lg-12">
+                        <h4>Log</h5>
                     </div>
+                    {% for item in error_log %}
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 members-box">
+                        <form action="{% url 'remove_error_log' item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="close"><span aria-hidden="true" class="fa fa-trash">
+                            </span></button>
+                        </form>
+                        <b>{{item.timestamp}}</b>, Removing  Team Member <b>"Elston"</b> from service <b>"Slack"</b> completed with failure
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endif %}
 
     </div>
+
+    <div id="shadowing"></div>
+    <div id="team_editbox" class="panel panel-primary">
+        <div id="boxtitle">
+            <p id="lightbox_content_heading"></p>
+            <div class="panel-heading text-center">
+            <h1 class="panel-title text-center" style="float:left">Edit Team</h1>
+                <div style="float:right" id="close" onclick="close_team_edtbox()" ><i class="menu_btn fa fa-times"></i></div>
+            </div>
+        </div>
+
+        <div>
+            <form id="team-edit-form" method="post" onsubmit="save_team_edtbox(); return false;">
+                {% csrf_token %}
+                <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
+                    {% for item in teamedit_form %}
+                        {% if not item.name == 'team' %}                        
+                            {{ item.label }}
+                        {% endif %}                        
+                        <div class="form-group">
+                            {{ item }}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div id="shadowing"></div>
+    <div id="changeteamowner_box" class="panel panel-primary">
+        <div id="boxtitle">
+            <p id="lightbox_content_heading"></p>
+            <div class="panel-heading text-center">
+            <h1 class="panel-title text-center" style="float:left">Change team owner </h1>
+                <div style="float:right" id="close" onclick="close_changeteamowner_box()" ><i class="menu_btn fa fa-times"></i></div>
+            </div>
+        </div>
+
+        <div>
+            <form id="changeteamowner-form" method="post" onsubmit="save_changeteamowner_box(); return false;">
+                {% csrf_token %}
+                {{ changeteamowner_form.team }}
+                <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
+                    <label for="id_old_owner">Current Owner:</label>
+                    <div class="form-group">
+                        <input id="id_old_owner" name="old_owner" type="text" value="{{team.owner}}" readonly>
+                    </div>
+                    
+                    <label for="id_owner">New Owner:</label>
+                    <div class="form-group">
+                        {{ changeteamowner_form.owner }}
+                    </div>
+                    <div class="form-group">
+                        <input class="acc-btns" type="submit" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
 
     <div id="shadowing"></div>
     <div id="box" class="panel panel-primary">

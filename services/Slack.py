@@ -11,6 +11,10 @@ from .common import check_service_instance, encrypt_data, decrypt_data
 
 
 class Slack:
+
+    def login_url(self):
+        return 'https://slack.com/signin'
+
     def get_form(self):
         return SlackForm(initial={'name': 'Slack'})
 
