@@ -2,7 +2,7 @@
     <div id="boxtitle">
         <p id="lightbox_content_heading"></p>
         <div class="panel-heading text-center">
-	    <h1 class="panel-title text-center" style="float:left">Create Team</h1>
+        <h1 class="panel-title text-center" style="float:left">Create Team</h1>
             <div style="float:right" id="close" onclick="closebox()" ><i class="menu_btn fa fa-times"></i></div>
         </div>
     </div>
@@ -11,9 +11,16 @@
         {% csrf_token %}
             <div class="col-lg-12 col-md-12 col-sm-12 grey-popup">
                 {% for item in form %}
-                <div class="form-group">
-                    {{ item }}
-                </div>
+                    {% if item.name == 'is_member' %}
+                    <div id="id_is_member" class="checkbox checkbox-primary text-left">
+                        {{ item }}
+                        <label for="id_is_member">{{ item.label }}</label>
+                    </div>
+                    {% else %}
+                    <div class="form-group">
+                        {{ item }}
+                    </div>
+                    {% endif %}
                 {% endfor %}
                 <div class="form-group">
                     <input class="acc-btns" type="submit" value="Create">

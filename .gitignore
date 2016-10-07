@@ -14,4 +14,4 @@ Vagrantfile
 *.sh
 *.sqlite3
 *.txt
-.gitignore
+*.gitignore

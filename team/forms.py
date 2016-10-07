@@ -34,6 +34,12 @@ class CreateTeamForm1(forms.Form):
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Description'}))
 
+    is_member = forms.BooleanField(
+        widget=forms.CheckboxInput(
+            attrs={'class': 'styled', 'checked': True, 'id': 'id_is_member'}),
+        label='Add to the team as a member', required=False
+    )
+
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super(CreateTeamForm1, self).__init__(*args, **kwargs)
@@ -53,3 +59,9 @@ class CreateTeamForm2(forms.Form):
     team_description = forms.CharField(
         widget=forms.TextInput(
             attrs={'required': True, 'placeholder': 'Team Description'}))
+
+    is_member = forms.BooleanField(
+        widget=forms.CheckboxInput(
+            attrs={'class': 'styled', 'checked': True, 'id': 'id_is_member'}),
+        label='Add to the team as a member', required=False
+    )

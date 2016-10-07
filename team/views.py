@@ -567,6 +567,10 @@ def create_team(request):
         team.description = form.cleaned_data['team_description']
         team.save()
 
+        # ...
+        if form.cleaned_data['is_member']:
+            team.member.add(request.user)
+
         org.team.add(team)
         org.save()
 
