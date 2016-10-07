@@ -5,3 +5,13 @@
 .idea
 env/
 staticfiles/
+
+
+*.env/*
+*.vagrant/*
+*.logs/*
+Vagrantfile
+*.sh
+*.sqlite3
+*.txt
+.gitignore
