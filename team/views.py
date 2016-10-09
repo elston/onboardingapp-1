@@ -653,7 +653,7 @@ def edit_team(request):
 @csrf_exempt
 def changeteamowner_team(request):
     # ...
-    print(request.POST)
+    # print(request.POST)
     form = ChangeTeamOwnerForm(request.POST)
     if form.is_valid():
         # ...
