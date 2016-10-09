@@ -125,7 +125,7 @@ function save_changeteamowner_box(){
                 var errors = json['response'];
 
                 for (var k in errors) {
-                    $("#team-edit-form").find('input[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
+                    $("#changeteamowner-form").find('select[name=' + k + ']').before('<div class="error" style="color: red;">' + errors[k] + '</div>');
                 }
             } else {
                 location.reload();
